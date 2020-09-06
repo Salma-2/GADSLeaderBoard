@@ -20,11 +20,13 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
     private final Context mContext;
     private final LayoutInflater mLayoutInflater;
     private List<Learner> mLearners;
+    private int mImageUrl;
 
 
-    public LearnerAdapter(Context context, List<Learner> learners) {
+    public LearnerAdapter(Context context, List<Learner> learners, int imageUrl) {
         mContext = context;
         mLearners= learners;
+        mImageUrl = imageUrl;
         mLayoutInflater = LayoutInflater.from( mContext );
     }
 
@@ -41,7 +43,7 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
         Learner learner = mLearners.get( position );
         holder.mNameText.setText( learner.getName() );
         holder.mInfoText.setText( learner.getInfo() );
-        holder.showImage( learner.getImageUrl() );
+        holder.mBadgeImage.setImageResource( mImageUrl );
     }
 
     @Override
@@ -61,13 +63,6 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
             mInfoText = (TextView) itemView.findViewById( R.id.learner_info_txt );
             mBadgeImage = (ImageView) itemView.findViewById( R.id.badge_image );
         }
-
-        public void showImage(String url){
-            if(url != null && !url.isEmpty() ){
-                Picasso.get().load( url ).resize( 160,160 ).centerCrop().into( mBadgeImage );
-            }
-        }
-
     }
 
 

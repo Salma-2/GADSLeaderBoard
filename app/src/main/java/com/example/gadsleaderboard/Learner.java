@@ -3,12 +3,11 @@ package com.example.gadsleaderboard;
 public class Learner {
     private String name;
     private String info;
-    private String imageUrl;
 
-    public Learner(String name, String info, String imageUrl) {
+    public Learner(String name, String info) {
         this.name = name;
         this.info = info;
-        this.imageUrl = imageUrl;
+
     }
 
     public String getName() {
@@ -27,11 +26,4 @@ public class Learner {
         this.info = info;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

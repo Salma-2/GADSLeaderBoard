@@ -20,13 +20,14 @@ import java.util.List;
 
 public class LearningFragment extends Fragment {
     List<Learner> learners = DataManager.getInstance().initializeLearner();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate( R.layout.learning_fragment, container, false );
         RecyclerView recyclerView = root.findViewById( R.id.item_list );
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager( getContext() );
-        LearnerAdapter adapter = new LearnerAdapter( getContext(), learners );
+        LearnerAdapter adapter = new LearnerAdapter( getContext(), learners, R.drawable.top_learner );
 
         recyclerView.setLayoutManager( linearLayoutManager );
         recyclerView.setAdapter( adapter );
