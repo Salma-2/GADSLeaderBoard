@@ -14,19 +14,6 @@ public class DataManager {
         return ourInstance;
     }
 
-    public List<Learner> initializeLearner() {
-        Learner learner1 = new Learner( "Salma", "250 learn hours, Egypt" );
-        mLearners.add( learner1 );
-        Learner learner2 = new Learner( "Salma", "250 learn hours, Egypt" );
-        mLearners.add( learner2 );
-        Learner learner3 = new Learner( "Salma", "250 learn hours, Egypt" );
-        mLearners.add( learner3 );
-        Learner learner4 = new Learner( "Salma", "250 learn hours, Egypt" );
-        mLearners.add( learner4 );
-        Learner learner5 = new Learner( "Salma", "250 learn hours, Egypt" );
-        mLearners.add( learner5 );
-        return mLearners;
-    }
 
 
 }
