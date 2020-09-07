@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SkillsFragment extends Fragment {
-    List<Learner> learners = null;
+
     private static final String USGS_REQUEST_URL = "https://gadsapi.herokuapp.com/api/skilliq";
     private LinearLayoutManager mLinearLayoutManager;
     private LearnerAdapter mAdapter;
@@ -55,6 +55,7 @@ public class SkillsFragment extends Fragment {
         mLinearLayoutManager = new LinearLayoutManager( getContext() );
         mRecyclerView.setLayoutManager( mLinearLayoutManager );
 
+        List<Learner> learners = DataManager.getInstance().mSkill;
         mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.skill_iq );
         mRecyclerView.setAdapter( mAdapter );
 
@@ -71,22 +72,22 @@ public class SkillsFragment extends Fragment {
         return isConnected;
     }
 
-    private class LearnerAsyncTask extends AsyncTask<String, Void, ArrayList<Learner>> {
+    private class LearnerAsyncTask extends AsyncTask<String, Void, List<Learner>> {
 
 
         @Override
-        protected ArrayList<Learner> doInBackground(String... urls) {
+        protected List<Learner> doInBackground(String... urls) {
 
             if (urls.length < 1 || urls[0] == null) {
                 return null;
             }
 
-            ArrayList<Learner> learners = QueryUtils.fetchEarthquakeData( urls[0], SKILL_CODE );
+           List<Learner> learners = QueryUtils.fetchEarthquakeData( urls[0], SKILL_CODE );
             return learners;
         }
 
         @Override
-        protected void onPostExecute(final ArrayList<Learner> learners) {
+        protected void onPostExecute(final List<Learner> learners) {
             if (learners == null) {
                 return;
             }

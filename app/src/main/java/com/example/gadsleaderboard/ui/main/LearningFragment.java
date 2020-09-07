@@ -33,7 +33,7 @@ public class LearningFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private LearnerAdapter mAdapter;
-    List<Learner> learners = null;
+
 
     @Nullable
     @Override
@@ -56,7 +56,10 @@ public class LearningFragment extends Fragment {
         mRecyclerView = root.findViewById( R.id.item_list );
         mLinearLayoutManager = new LinearLayoutManager( getContext() );
         mRecyclerView.setLayoutManager( mLinearLayoutManager );
-        mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.skill_iq );
+
+        List<Learner> learners = DataManager.getInstance().mLearners;
+        mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.top_learner );
+
         mRecyclerView.setAdapter( mAdapter );
         return root;
     }
@@ -72,27 +75,25 @@ public class LearningFragment extends Fragment {
         return isConnected;
     }
 
-    private class LearnerAsyncTask extends AsyncTask<String,Void, ArrayList<Learner>>
+    private class LearnerAsyncTask extends AsyncTask<String,Void, List<Learner>>
     {
         @Override
-        protected ArrayList<Learner> doInBackground(String... urls) {
+        protected List<Learner> doInBackground(String... urls) {
 
             if (urls.length < 1 || urls[0] == null) {
                 return null;
             }
 
-            ArrayList<Learner> learners= QueryUtils.fetchEarthquakeData(urls[0], LEARN_CODE );
+            List<Learner> learners= QueryUtils.fetchEarthquakeData(urls[0], LEARN_CODE );
             return learners;
         }
         @Override
-        protected void onPostExecute(final ArrayList<Learner> learners) {
+        protected void onPostExecute(final List<Learner> learners) {
             if (learners == null) {
                 return;
             }
 
-
-            mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.top_learner );
-            mRecyclerView.setAdapter( mAdapter );
+            mAdapter.notifyDataSetChanged();
         }
 
     }

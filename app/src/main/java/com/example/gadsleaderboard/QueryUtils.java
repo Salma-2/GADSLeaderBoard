@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
@@ -104,38 +105,48 @@ public final class QueryUtils {
         return output.toString();
     }
 
-    public static ArrayList<Learner> extractLearners(String learnerJSON, int code) {
-
-        String msg = null;
-        String value = null;
-
+    public static List<Learner> extractLearners(String learnerJSON, int code) {
         if (TextUtils.isEmpty( learnerJSON )) {
             return null;
         }
 
+        String msg = null;
+        String value = null;
+        DataManager dm = DataManager.getInstance();
         // Create an empty ArrayList that we can start adding learner to
-        ArrayList<Learner> learners = new ArrayList<>();
-        try {
+        List<Learner> learners = new ArrayList<>();
 
+        try {
+            JSONArray learnersArray = new JSONArray( learnerJSON );
             if (code == SkillsFragment.SKILL_CODE) {
                 msg = " Skill IQ Score, ";
                 value = "score";
+                for (int i = 0; i < learnersArray.length(); i++) {
+                    JSONObject currentLearner = learnersArray.getJSONObject( i );
+                    String name = currentLearner.getString( "name" );
+                    int num = currentLearner.getInt( value );
+                    String country = currentLearner.getString( "country" );
+                    String info = num + msg + country + ".";
+                    Learner learner = new Learner( name, info );
+                    dm.mSkill.add( learner );
+                }
+                learners= dm.mSkill;
             } else if (code == LearningFragment.LEARN_CODE) {
                 msg = " Learning hours, ";
                 value = "hours";
+                for (int i = 0; i < learnersArray.length(); i++) {
+                    JSONObject currentLearner = learnersArray.getJSONObject( i );
+                    String name = currentLearner.getString( "name" );
+                    int num = currentLearner.getInt( value );
+                    String country = currentLearner.getString( "country" );
+                    String info = num + msg + country + ".";
+                    Learner learner = new Learner( name, info );
+                    dm.mLearners.add( learner );
+                }
+                learners = dm.mLearners;
             }
 
-            //Extract features
-            JSONArray learnersArray = new JSONArray( learnerJSON );
-            for (int i = 0; i < learnersArray.length(); i++) {
-                JSONObject currentLearner = learnersArray.getJSONObject( i );
-                String name = currentLearner.getString( "name" );
-                int num = currentLearner.getInt( value );
-                String country = currentLearner.getString( "country" );
-                String info = num + msg + country + ".";
-                Learner learner = new Learner( name, info );
-                learners.add( learner );
-            }
+
 
         } catch (JSONException e) {
             Log.e( "QueryUtils", "Problem parsing the learner JSON results", e );
@@ -145,7 +156,8 @@ public final class QueryUtils {
     }
 
 
-    public static ArrayList<Learner> fetchEarthquakeData(String requestUrl, int code) {
+
+    public static List<Learner> fetchEarthquakeData(String requestUrl, int code) {
         // Create URL object
         URL url = createUrl( requestUrl );
         // Perform HTTP request to the URL and receive a JSON response back
@@ -157,7 +169,7 @@ public final class QueryUtils {
         }
 
         // Extract relevant fields from the JSON response and create an {@link Event} object
-        ArrayList<Learner> learners = extractLearners( jsonResponse, code );
+        List<Learner> learners = extractLearners( jsonResponse, code );
 
         // Return the {@link Event}
         return learners;
