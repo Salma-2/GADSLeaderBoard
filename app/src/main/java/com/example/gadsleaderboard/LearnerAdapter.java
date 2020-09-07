@@ -1,6 +1,7 @@
 package com.example.gadsleaderboard;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
         Learner learner = mLearners.get( position );
         holder.mNameText.setText( learner.getName() );
         holder.mInfoText.setText( learner.getInfo() );
-        holder.mBadgeImage.setImageResource( mImageUrl );
+        holder.showImage( learner.getBadgeUrl() );
     }
 
     @Override
@@ -63,7 +64,15 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
             mInfoText = (TextView) itemView.findViewById( R.id.learner_info_txt );
             mBadgeImage = (ImageView) itemView.findViewById( R.id.badge_image );
         }
+        public void showImage(String url){
+            if(url != null && !url.isEmpty() ){
+                Picasso.get().load( url ).resize( 280,280 ).centerCrop().into( mBadgeImage );
+
+            }
+        }
     }
+
+
 
 
 }

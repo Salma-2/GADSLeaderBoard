@@ -3,10 +3,14 @@ package com.example.gadsleaderboard;
 public class Learner {
     private String name;
     private String info;
+    private String badgeUrl;
 
-    public Learner(String name, String info) {
+
+
+    public Learner(String name, String info, String badgeUrl) {
         this.name = name;
         this.info = info;
+        this.badgeUrl = badgeUrl;
 
     }
 
@@ -24,6 +28,14 @@ public class Learner {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getBadgeUrl() {
+        return badgeUrl;
+    }
+
+    public void setBadgeUrl(String badgeUrl) {
+        this.badgeUrl = badgeUrl;
     }
 
 }

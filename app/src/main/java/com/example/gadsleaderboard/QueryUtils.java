@@ -126,11 +126,12 @@ public final class QueryUtils {
                     String name = currentLearner.getString( "name" );
                     int num = currentLearner.getInt( value );
                     String country = currentLearner.getString( "country" );
+                    String url = currentLearner.getString( "badgeUrl" );
                     String info = num + msg + country + ".";
-                    Learner learner = new Learner( name, info );
+                    Learner learner = new Learner( name, info, url );
                     dm.mSkill.add( learner );
                 }
-                learners= dm.mSkill;
+                learners = dm.mSkill;
             } else if (code == LearningFragment.LEARN_CODE) {
                 msg = " Learning hours, ";
                 value = "hours";
@@ -139,13 +140,13 @@ public final class QueryUtils {
                     String name = currentLearner.getString( "name" );
                     int num = currentLearner.getInt( value );
                     String country = currentLearner.getString( "country" );
+                    String url = currentLearner.getString( "badgeUrl" );
                     String info = num + msg + country + ".";
-                    Learner learner = new Learner( name, info );
+                    Learner learner = new Learner( name, info, url );
                     dm.mLearners.add( learner );
                 }
                 learners = dm.mLearners;
             }
-
 
 
         } catch (JSONException e) {
@@ -154,7 +155,6 @@ public final class QueryUtils {
 
         return learners;
     }
-
 
 
     public static List<Learner> fetchEarthquakeData(String requestUrl, int code) {
