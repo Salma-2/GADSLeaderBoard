@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- lma tdosi-->
+    <item android:state_pressed="true" >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <gradient android:angle="-90" android:startColor="#EE8A08" android:endColor="#f7c485"  />
+        </shape>
+    </item>
+    <!--lw 3l2ty soba3k 3la el zorar-->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle"  >
+            <corners android:radius="3dip" />
+            <solid android:color="#EE8A08"/>
+            <gradient android:angle="-90" android:startColor="#EE8A08" android:endColor="#f7c485"  />
+        </shape>
+    </item>
+    <item >
+        <shape android:shape="rectangle"  >
+            <corners android:radius="20dp" />
+            <solid android:color="@color/colorAccent"/>
+
+        </shape>
+    </item>
+</selector>
