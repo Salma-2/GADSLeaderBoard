@@ -20,6 +20,8 @@ import java.util.List;
 
 public class SkillsFragment extends Fragment {
     List<Learner> learners = DataManager.getInstance().initializeLearner();
+    private static final String USGS_REQUEST_URL= "https://gadsapi.herokuapp.com/api/skilliq";
+
 
     @Nullable
     @Override

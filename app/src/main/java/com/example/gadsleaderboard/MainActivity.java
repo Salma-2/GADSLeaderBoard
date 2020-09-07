@@ -19,10 +19,6 @@ import com.example.gadsleaderboard.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerLearners;
-    private LinearLayoutManager mLearnerLayoutManager;
-    private LearnerAdapter mAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
