@@ -29,9 +29,11 @@ import java.util.List;
 
 public class LearningFragment extends Fragment {
     private static final String USGS_REQUEST_URL= "https://gadsapi.herokuapp.com/api/hours";
+    public static final int LEARN_CODE = 42;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private LearnerAdapter mAdapter;
+    List<Learner> learners = null;
 
     @Nullable
     @Override
@@ -52,6 +54,10 @@ public class LearningFragment extends Fragment {
 
         View root = inflater.inflate( R.layout.learning_fragment, container, false );
         mRecyclerView = root.findViewById( R.id.item_list );
+        mLinearLayoutManager = new LinearLayoutManager( getContext() );
+        mRecyclerView.setLayoutManager( mLinearLayoutManager );
+        mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.skill_iq );
+        mRecyclerView.setAdapter( mAdapter );
         return root;
     }
 
@@ -75,7 +81,7 @@ public class LearningFragment extends Fragment {
                 return null;
             }
 
-            ArrayList<Learner> learners= QueryUtils.fetchEarthquakeData(urls[0]);
+            ArrayList<Learner> learners= QueryUtils.fetchEarthquakeData(urls[0], LEARN_CODE );
             return learners;
         }
         @Override
@@ -84,10 +90,8 @@ public class LearningFragment extends Fragment {
                 return;
             }
 
-            mLinearLayoutManager = new LinearLayoutManager( getContext() );
-            mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.top_learner );
 
-            mRecyclerView.setLayoutManager( mLinearLayoutManager );
+            mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.top_learner );
             mRecyclerView.setAdapter( mAdapter );
         }
 

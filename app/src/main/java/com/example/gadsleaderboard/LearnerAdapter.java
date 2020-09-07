@@ -25,7 +25,7 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
 
     public LearnerAdapter(Context context, List<Learner> learners, int imageUrl) {
         mContext = context;
-        mLearners= learners;
+        mLearners = learners;
         mImageUrl = imageUrl;
         mLayoutInflater = LayoutInflater.from( mContext );
     }
@@ -48,7 +48,7 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return mLearners.size();
+        return mLearners == null ? 0 : mLearners.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,7 +64,6 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
             mBadgeImage = (ImageView) itemView.findViewById( R.id.badge_image );
         }
     }
-
 
 
 }
