@@ -1,13 +1,9 @@
 package com.example.gadsleaderboard;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.example.gadsleaderboard.models.Learner;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class DataManager {
     public static List<Learner> mLearners;

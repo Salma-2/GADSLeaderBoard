@@ -1,4 +1,4 @@
-package com.example.gadsleaderboard;
+package com.example.gadsleaderboard.models;
 
 public class Learner {
     private String name;

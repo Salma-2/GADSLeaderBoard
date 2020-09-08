@@ -3,6 +3,7 @@ package com.example.gadsleaderboard;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.gadsleaderboard.models.Learner;
 import com.example.gadsleaderboard.ui.main.LearningFragment;
 import com.example.gadsleaderboard.ui.main.SkillsFragment;
 
