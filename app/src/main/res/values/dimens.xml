@@ -15,7 +15,7 @@
     <dimen name="large_padding">32dp</dimen>
     <dimen name="default_padding">8dp</dimen>
     <dimen name="meduium_padding">16dp</dimen>
-    <dimen name="very_large_margin">100dp</dimen>
+    <dimen name="very_large_margin">50dp</dimen>
 
 
 </resources>
