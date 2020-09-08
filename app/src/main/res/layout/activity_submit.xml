@@ -16,6 +16,7 @@
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/very_large_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -80,14 +81,14 @@
 
     <Button
         android:id="@+id/submit_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="319dp"
+        android:layout_height="92dp"
         android:layout_marginTop="@dimen/very_large_margin"
         android:background="@drawable/round_btn_submit"
         android:padding="@dimen/large_padding"
         android:text="@string/submit"
         android:textColor="@color/colorAccent"
-        android:textSize="40sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
