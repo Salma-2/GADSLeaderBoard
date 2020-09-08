@@ -13,4 +13,5 @@
     <string name="todo">TODO</string>
     <string name="project_submission">Project Submission</string>
     <string name="close_dialog">close dialog</string>
+    <string name="submission_successful">Submission Successful</string>
 </resources>

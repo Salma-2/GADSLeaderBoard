@@ -57,8 +57,8 @@ public class SubmitActivity extends AppCompatActivity {
         View root= createDialog();
         mConfirmLayout = (LinearLayout) findViewById( R.id.confirm_layout );
 
-        mConfirmBtn = (Button) root.findViewById( R.id.confirm_btn );
-        mCloseBtn =(ImageButton) root.findViewById( R.id.close_btn );
+//        mConfirmBtn = (Button) root.findViewById( R.id.confirm_btn );
+//        mCloseBtn =(ImageButton) root.findViewById( R.id.close_btn );
 
 
         mBackBtn.setOnClickListener( new View.OnClickListener() {
@@ -78,64 +78,64 @@ public class SubmitActivity extends AppCompatActivity {
         } );
 
         //exit without submit
-       mCloseBtn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAlertDialog.dismiss();
-            }
-        } );
+//       mCloseBtn.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAlertDialog.dismiss();
+//            }
+//        } );
 
 
-
-        mConfirmBtn.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAlertDialog.dismiss();
-                LearningService learningService = ServiceBuilder.buildPostService( LearningService.class );
-                Call<Void> request = learningService.pushCode(
-                        mFirstName.getText().toString(),
-                        mLastName.getText().toString(),
-                        mEmail.getText().toString(),
-                        mProjectLink.getText().toString() );
-
-                request.enqueue( new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText( context, "Submission Successful",
-                                    Toast.LENGTH_LONG );
-                        } else if (response.code() == 401) {
-                            Toast.makeText( context, "Your session has expired",
-                                    Toast.LENGTH_LONG ).show();
-                        } else {
-                            Toast.makeText( context, "Submission is not Successful",
-                                    Toast.LENGTH_LONG ).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        if (t instanceof IOException) {
-                            Toast.makeText( context, "A connection error occured",
-                                    Toast.LENGTH_LONG ).show();
-
-                        } else {
-                            Toast.makeText( context, "Submission is not Successful",
-                                    Toast.LENGTH_LONG ).show();
-                        }
-
-                    }
-                } );
-            }
-        } );
+//
+//        mConfirmBtn.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mAlertDialog.dismiss();
+//                LearningService learningService = ServiceBuilder.buildPostService( LearningService.class );
+//                Call<Void> request = learningService.pushCode(
+//                        mFirstName.getText().toString(),
+//                        mLastName.getText().toString(),
+//                        mEmail.getText().toString(),
+//                        mProjectLink.getText().toString() );
+//
+//                request.enqueue( new Callback<Void>() {
+//                    @Override
+//                    public void onResponse(Call<Void> call, Response<Void> response) {
+//                        if (response.isSuccessful()) {
+//                            Toast.makeText( context, "Submission Successful",
+//                                    Toast.LENGTH_LONG );
+//                        } else if (response.code() == 401) {
+//                            Toast.makeText( context, "Your session has expired",
+//                                    Toast.LENGTH_LONG ).show();
+//                        } else {
+//                            Toast.makeText( context, "Submission is not Successful",
+//                                    Toast.LENGTH_LONG ).show();
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Void> call, Throwable t) {
+//                        if (t instanceof IOException) {
+//                            Toast.makeText( context, "A connection error occured",
+//                                    Toast.LENGTH_LONG ).show();
+//
+//                        } else {
+//                            Toast.makeText( context, "Submission is not Successful",
+//                                    Toast.LENGTH_LONG ).show();
+//                        }
+//
+//                    }
+//                } );
+//            }
+//        } );
 
     }
 
     private View createDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder( SubmitActivity.this );
         ViewGroup viewGroup = findViewById( android.R.id.content );
-        View dialogView = LayoutInflater.from( getBaseContext() ).inflate( R.layout.confirm_dialog,
+        View dialogView = LayoutInflater.from( getBaseContext() ).inflate( R.layout.success_dialog,
                 viewGroup, false );
         builder.setView( dialogView );
         mAlertDialog = builder.create();
