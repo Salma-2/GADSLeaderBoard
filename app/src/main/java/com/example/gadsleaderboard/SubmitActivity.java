@@ -11,13 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.gadsleaderboard.services.LearningService;
 import com.example.gadsleaderboard.services.ServiceBuilder;
-import com.example.gadsleaderboard.ui.main.LearningFragment;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ public class SubmitActivity extends AppCompatActivity {
     private EditText mProjectLink;
     private LinearLayout mConfirmLayout;
     private Button mConfirmBtn;
-    private ImageView mCloseBtn;
+    private ImageButton mCloseBtn;
     private ImageView mBackBtn;
     private AlertDialog mAlertDialog;
 
@@ -58,7 +58,7 @@ public class SubmitActivity extends AppCompatActivity {
         mConfirmLayout = (LinearLayout) findViewById( R.id.confirm_layout );
 
         mConfirmBtn = (Button) root.findViewById( R.id.confirm_btn );
-        mCloseBtn =(ImageView) root.findViewById( R.id.close_btn );
+        mCloseBtn =(ImageButton) root.findViewById( R.id.close_btn );
 
 
         mBackBtn.setOnClickListener( new View.OnClickListener() {
@@ -135,7 +135,7 @@ public class SubmitActivity extends AppCompatActivity {
     private View createDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder( SubmitActivity.this );
         ViewGroup viewGroup = findViewById( android.R.id.content );
-        View dialogView = LayoutInflater.from( getBaseContext() ).inflate( R.layout.confirm_layout,
+        View dialogView = LayoutInflater.from( getBaseContext() ).inflate( R.layout.confirm_dialog,
                 viewGroup, false );
         builder.setView( dialogView );
         mAlertDialog = builder.create();
