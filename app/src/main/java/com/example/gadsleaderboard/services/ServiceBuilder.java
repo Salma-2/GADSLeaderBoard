@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceBuilder {
 
     private static final String URL= "https://gadsapi.herokuapp.com/";
-
+    private static final String NETWORK_POST_URL= "https://docs.google.com/forms/d/e/";
 
     //create Logger
     private static HttpLoggingInterceptor logger =
@@ -28,7 +28,6 @@ public class ServiceBuilder {
             new OkHttpClient.Builder()
                     .readTimeout( 15, TimeUnit.SECONDS )
                     .addInterceptor( logger );
-
 
 
     private static Retrofit.Builder builder=
@@ -41,5 +40,21 @@ public class ServiceBuilder {
     public static <S> S buildService(Class<S> serviceType){
         return retrofit.create( serviceType );
     }
+
+
+
+    //Network post
+    private static Retrofit.Builder postBuilder=
+            new Retrofit.Builder().baseUrl( NETWORK_POST_URL ).
+                    addConverterFactory( GsonConverterFactory.create() )
+                    .client( okHttp.build() );
+
+    private static Retrofit postRetrofit = postBuilder.build();
+
+    public static <S> S buildPostService(Class<S> serviceType){
+        return postRetrofit.create( serviceType );
+    }
+
+
 }
 
