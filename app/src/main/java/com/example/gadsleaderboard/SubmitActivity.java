@@ -1,22 +1,25 @@
 package com.example.gadsleaderboard;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.gadsleaderboard.models.Learner;
 import com.example.gadsleaderboard.services.LearningService;
 import com.example.gadsleaderboard.services.ServiceBuilder;
+import com.example.gadsleaderboard.ui.main.LearningFragment;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,8 +33,11 @@ public class SubmitActivity extends AppCompatActivity {
     private EditText mLastName;
     private EditText mEmail;
     private EditText mProjectLink;
-    private ConstraintLayout mConfirmLayout;
+    private LinearLayout mConfirmLayout;
     private Button mConfirmBtn;
+    private ImageView mCloseBtn;
+    private ImageView mBackBtn;
+    private AlertDialog mAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +50,47 @@ public class SubmitActivity extends AppCompatActivity {
         mLastName = (EditText) findViewById( R.id.lastname_txt );
         mEmail = (EditText) findViewById( R.id.email_txt );
         mProjectLink = (EditText) findViewById( R.id.github_link_txt );
+
         mSubmitBtn = (Button) findViewById( R.id.submit_btn );
-        mConfirmLayout = (ConstraintLayout) findViewById( R.id.confirm_layout );
-        mConfirmBtn = (Button) findViewById( R.id.confirm_btn );
+        mBackBtn = (ImageView) findViewById( R.id.back_btn );
+
+        View root= createDialog();
+        mConfirmLayout = (LinearLayout) findViewById( R.id.confirm_layout );
+
+        mConfirmBtn = (Button) root.findViewById( R.id.confirm_btn );
+        mCloseBtn =(ImageView) root.findViewById( R.id.close_btn );
+
+
+        mBackBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent( context, MainActivity.class ) );
+            }
+        } );
 
 
         mSubmitBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mConfirmLayout.setVisibility( View.VISIBLE );
+
+                mAlertDialog.show();
             }
         } );
+
+        //exit without submit
+       mCloseBtn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAlertDialog.dismiss();
+            }
+        } );
+
+
 
         mConfirmBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAlertDialog.dismiss();
                 LearningService learningService = ServiceBuilder.buildPostService( LearningService.class );
                 Call<Void> request = learningService.pushCode(
                         mFirstName.getText().toString(),
@@ -66,15 +98,13 @@ public class SubmitActivity extends AppCompatActivity {
                         mEmail.getText().toString(),
                         mProjectLink.getText().toString() );
 
-
                 request.enqueue( new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(response.isSuccessful()){
-                            Toast.makeText(context,"Submission Successful",
+                        if (response.isSuccessful()) {
+                            Toast.makeText( context, "Submission Successful",
                                     Toast.LENGTH_LONG );
-                        }
-                        else if (response.code() == 401) {
+                        } else if (response.code() == 401) {
                             Toast.makeText( context, "Your session has expired",
                                     Toast.LENGTH_LONG ).show();
                         } else {
@@ -100,6 +130,17 @@ public class SubmitActivity extends AppCompatActivity {
             }
         } );
 
-
     }
+
+    private View createDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder( SubmitActivity.this );
+        ViewGroup viewGroup = findViewById( android.R.id.content );
+        View dialogView = LayoutInflater.from( getBaseContext() ).inflate( R.layout.confirm_layout,
+                viewGroup, false );
+        builder.setView( dialogView );
+        mAlertDialog = builder.create();
+        return dialogView;
+    }
+
+
 }

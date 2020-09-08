@@ -12,4 +12,5 @@
     <string name="app_bar_image">App Bar Image</string>
     <string name="todo">TODO</string>
     <string name="project_submission">Project Submission</string>
+    <string name="close_dialog">close dialog</string>
 </resources>
