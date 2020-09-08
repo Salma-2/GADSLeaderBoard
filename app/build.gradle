@@ -33,4 +33,16 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+
+    //retrofit and GSON
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    //logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+
+
+
+
+
 }

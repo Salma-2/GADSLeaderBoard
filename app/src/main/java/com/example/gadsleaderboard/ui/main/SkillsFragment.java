@@ -1,13 +1,12 @@
 package com.example.gadsleaderboard.ui.main;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,20 +14,21 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gadsleaderboard.DataManager;
-import com.example.gadsleaderboard.Learner;
+import com.example.gadsleaderboard.models.Learner;
 import com.example.gadsleaderboard.LearnerAdapter;
-import com.example.gadsleaderboard.QueryUtils;
 import com.example.gadsleaderboard.R;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.gadsleaderboard.services.LearningService;
+import com.example.gadsleaderboard.services.ServiceBuilder;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SkillsFragment extends Fragment {
 
-    private static final String USGS_REQUEST_URL = "https://gadsapi.herokuapp.com/api/skilliq";
     private LinearLayoutManager mLinearLayoutManager;
     private LearnerAdapter mAdapter;
     private RecyclerView mRecyclerView;
@@ -39,61 +39,53 @@ public class SkillsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if (!hasInternet( getContext() )) {
-
-            Snackbar.make( container, "No Internet Connection",
-                    BaseTransientBottomBar.LENGTH_LONG );
-
-        } else {
-
-            LearnerAsyncTask task = new LearnerAsyncTask();
-            task.execute( USGS_REQUEST_URL );
-        }
-
+        final Context context = getContext();
         View root = inflater.inflate( R.layout.learning_fragment, container, false );
+
+
         mRecyclerView = root.findViewById( R.id.item_list );
         mLinearLayoutManager = new LinearLayoutManager( getContext() );
         mRecyclerView.setLayoutManager( mLinearLayoutManager );
 
-        List<Learner> learners = DataManager.getInstance().mSkill;
-        mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.skill_iq );
-        mRecyclerView.setAdapter( mAdapter );
+        LearningService learningService = ServiceBuilder.buildService( LearningService.class );
+        Call<List<Learner>> request = learningService.getSkill();
+
+        request.enqueue( new Callback<List<Learner>>() {
+            @Override
+            public void onResponse(Call<List<Learner>> call, Response<List<Learner>> response) {
+                if(response.isSuccessful()){
+                    mAdapter = new LearnerAdapter( getContext(), response.body(),SKILL_CODE );
+                    mRecyclerView.setAdapter( mAdapter );
+                }
+                else if (response.code() == 401) {
+                    Toast.makeText( context, "Your session has expired",
+                            Toast.LENGTH_LONG ).show();
+                } else {
+                    Toast.makeText( context, "Failed to retrieve skills.",
+                            Toast.LENGTH_LONG ).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Learner>> call, Throwable t) {
+                //connection error
+                if (t instanceof IOException) {
+                    Toast.makeText( context, "A connection error occured",
+                            Toast.LENGTH_LONG ).show();
+
+                } else {
+                    Toast.makeText( context, "Failed to retrieve skills.",
+                            Toast.LENGTH_LONG ).show();
+                }
+
+            }
+        } );
+
+
+
 
         return root;
     }
 
-
-    //Determine whether you have an internet connection
-    private static boolean hasInternet(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService( Context.CONNECTIVITY_SERVICE );
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-        return isConnected;
-    }
-
-    private class LearnerAsyncTask extends AsyncTask<String, Void, List<Learner>> {
-
-
-        @Override
-        protected List<Learner> doInBackground(String... urls) {
-
-            if (urls.length < 1 || urls[0] == null) {
-                return null;
-            }
-
-           List<Learner> learners = QueryUtils.fetchEarthquakeData( urls[0], SKILL_CODE );
-            return learners;
-        }
-
-        @Override
-        protected void onPostExecute(final List<Learner> learners) {
-            if (learners == null) {
-                return;
-            }
-            mAdapter = new LearnerAdapter( getContext(), learners, R.drawable.skill_iq );
-            mRecyclerView.setAdapter( mAdapter );
-        }
-
-    }
 }

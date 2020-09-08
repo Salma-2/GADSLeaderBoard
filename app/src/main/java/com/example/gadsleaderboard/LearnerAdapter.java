@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gadsleaderboard.models.Learner;
+import com.example.gadsleaderboard.ui.main.LearningFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,13 +21,13 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
     private final Context mContext;
     private final LayoutInflater mLayoutInflater;
     private List<Learner> mLearners;
-    private int mImageUrl;
+   private int mCode;
 
 
-    public LearnerAdapter(Context context, List<Learner> learners, int imageUrl) {
+    public LearnerAdapter(Context context, List<Learner> learners, int code) {
         mContext = context;
         mLearners = learners;
-        mImageUrl = imageUrl;
+        mCode= code;
         mLayoutInflater = LayoutInflater.from( mContext );
     }
 
@@ -41,9 +42,28 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Learner learner = mLearners.get( position );
-        holder.mNameText.setText( learner.getName() );
-        holder.mInfoText.setText( learner.getInfo() );
-        holder.showImage( learner.getBadgeUrl() );
+        String msg;
+        String info;
+
+        String name = learner.getName();
+        String country = learner.getCountry();
+
+        if(mCode == LearningFragment.LEARN_CODE){
+            int hours= learner.getHours();
+            msg = " Learning hours, ";
+            info = hours+ msg+ country;
+        }
+        else{
+            int score = learner.getScore();
+            msg = " Skill IQ score, ";
+            info = score+ msg+ country;
+        }
+
+        String badgeUrl = learner.getBadgeUrl();
+
+        holder.mNameText.setText( name );
+        holder.mInfoText.setText( info );
+        holder.showImage( badgeUrl );
     }
 
     @Override
