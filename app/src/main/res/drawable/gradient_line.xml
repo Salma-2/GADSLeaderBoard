@@ -8,10 +8,10 @@
 
         android:startColor="#302312"
 
-        android:centerColor="#DD983C"
+        android:centerColor="@color/textColor"
 
         android:endColor="#302312"
 
-        android:angle="0" />
+        android:angle="-90" />
 
 </shape>
