@@ -5,6 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.example.gadsleaderboard"
         minSdkVersion 16
         targetSdkVersion 29
@@ -12,6 +13,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {

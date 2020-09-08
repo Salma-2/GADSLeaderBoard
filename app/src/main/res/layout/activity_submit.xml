@@ -4,45 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".SubmitActivity">
 
-    <EditText
-        android:id="@+id/firstname_txt"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/name_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/fisrt_name"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/lastname_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/last_name"
-        android:inputType="textPersonName"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/firstname_txt"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/firstname_txt"
+            style="@style/EditTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boarder_edit_text"
+            android:hint="@string/fisrt_name"
+            android:inputType="textPersonName"
+            android:layout_margin="4dp"/>
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/lastname_txt"
+            style="@style/EditTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boarder_edit_text"
+            android:hint="@string/last_name"
+            android:inputType="textPersonName"
+            android:layout_margin="4dp"/>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/email_txt"
-        android:layout_width="wrap_content"
+        style="@style/EditTextStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:background="@drawable/boarder_edit_text"
         android:hint="@string/email_address"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastname_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/name_layout" />
 
     <EditText
         android:id="@+id/github_link_txt"
-        android:layout_width="wrap_content"
+        style="@style/EditTextStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/boarder_edit_text"
         android:hint="@string/project_on_github_link"
         android:inputType="textUri"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,8 +82,60 @@
         android:id="@+id/submit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:background="@drawable/round_btn_submit"
+        android:padding="@dimen/large_padding"
         android:text="@string/submit"
+        android:textColor="@color/colorAccent"
+        android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/github_link_txt" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/confirm_layout"
+        android:layout_width="409dp"
+        android:layout_height="546dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/close_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginEnd="@dimen/large_margin"
+            android:layout_marginRight="@dimen/large_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_close_24" />
+
+        <TextView
+            android:id="@+id/confirm_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Are You Sure?"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_txt" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

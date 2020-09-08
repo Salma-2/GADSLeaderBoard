@@ -16,4 +16,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="HintText">
+        <item name="android:color">#757575</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="EditTextStyle" parent="HintText">
+        <item name="android:paddingBottom">@dimen/meduium_padding</item>
+        <item name="android:paddingTop">@dimen/meduium_padding</item>
+        <item name="android:paddingLeft">@dimen/default_padding</item>
+        <item name="android:paddingRight">@dimen/large_padding</item>
+
+    </style>
+
 </resources>
