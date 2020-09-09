@@ -47,6 +47,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         String name = learner.getName();
         String country = learner.getCountry();
         String badgeUrl = learner.getBadgeUrl();
+        holder.showBadge( badgeUrl );
         int score = learner.getScore();
         msg = " Skill IQ score, ";
         info = score+ msg+ country;
@@ -64,12 +65,21 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
 
         private final TextView mNameText;
         private final TextView mInfoText;
+        private final ImageView mBadgeView;
 
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
             mNameText = (TextView) itemView.findViewById( R.id.learner_name_txt );
             mInfoText = (TextView) itemView.findViewById( R.id.learner_info_txt );
+            mBadgeView = (ImageView) itemView.findViewById( R.id.badge_image );
 
+        }
+
+        private void showBadge(String url){
+            if(url == null || url.isEmpty()){
+                return;
+            }
+            Picasso.get().load( url ).into( mBadgeView );
         }
 
     }
