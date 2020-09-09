@@ -87,6 +87,12 @@ public class SubmitActivity extends AppCompatActivity {
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+        confirmDialogView.findViewById( R.id.close_btn ).setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               alertDialog.dismiss();
+            }
+        } );
     }
     private void createSuccessDialog(View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(SubmitActivity.this);
@@ -99,6 +105,12 @@ public class SubmitActivity extends AppCompatActivity {
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+        confirmDialogView.findViewById( R.id.close_btn ).setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        } );
     }
     private void createConfirmDialog(View view){
 
