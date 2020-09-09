@@ -1,5 +1,5 @@
 # GADSLeaderBoard
-![](images/one.jpeg)
+![](images/one.jpeg){:height="50%" width="50%"}
 ![](images/two.jpeg)
 ![](images/three.jpeg)
 ![](images/four.jpeg)
