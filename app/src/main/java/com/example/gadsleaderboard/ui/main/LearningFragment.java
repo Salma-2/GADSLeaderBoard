@@ -59,13 +59,13 @@ public class LearningFragment extends Fragment {
                     mAdapter = new LearnerAdapter( getContext(), response.body(),LEARN_CODE );
                     mRecyclerView.setAdapter( mAdapter );
                 }
-                else if (response.code() == 401) {
-                    Toast.makeText( context, "Your session has expired",
-                            Toast.LENGTH_LONG ).show();
-                } else {
-                    Toast.makeText( context, "Failed to retrieve learners.",
-                            Toast.LENGTH_LONG ).show();
-                }
+//                else if (response.code() == 401) {
+//                    Toast.makeText( context, "Your session has expired",
+//                            Toast.LENGTH_LONG ).show();
+//                } else {
+//                    Toast.makeText( context, "Failed to retrieve learners.",
+//                            Toast.LENGTH_LONG ).show();
+//                }
 
             }
 

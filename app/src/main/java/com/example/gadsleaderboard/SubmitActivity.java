@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +65,13 @@ public class SubmitActivity extends AppCompatActivity {
         mSubmitBtn.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createConfirmDialog( v );
+                if(notEmpty()){
+                    createConfirmDialog( v );
+                }
+               else
+                   Toast.makeText( context,"Field cannot be " +
+                        "left blank.",Toast.LENGTH_LONG ).show();
+
             }
         } );
 
@@ -151,6 +158,14 @@ public class SubmitActivity extends AppCompatActivity {
                 createFailDialog( v );
             }
         } );
+    }
+    private Boolean notEmpty(){
+        return (!TextUtils.isEmpty(mFirstName.getText().toString()) &&
+                !TextUtils.isEmpty( mLastName.getText().toString()) &&
+                !TextUtils.isEmpty( mEmail.getText().toString()) &&
+                !TextUtils.isEmpty( mProjectLink.getText().toString()))? true: false;
+
+
     }
 
 }
