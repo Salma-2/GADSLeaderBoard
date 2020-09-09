@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.gadsleaderboard.models.Learner;
-import com.example.gadsleaderboard.LearnerAdapter;
+import com.example.gadsleaderboard.adapters.LearnerAdapter;
 
 import com.example.gadsleaderboard.R;
 import com.example.gadsleaderboard.services.LearningService;
@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class LearningFragment extends Fragment {
 
-    public static final int LEARN_CODE = 42;
+    public static final int LEARN_CODE = 456;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private LearnerAdapter mAdapter;
@@ -56,7 +56,7 @@ public class LearningFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Learner>> call, Response<List<Learner>> response) {
                 if(response.isSuccessful()){
-                    mAdapter = new LearnerAdapter( getContext(), response.body(),LEARN_CODE );
+                    mAdapter = new LearnerAdapter( getContext(), response.body() );
                     mRecyclerView.setAdapter( mAdapter );
                 }
 //                else if (response.code() == 401) {
@@ -88,6 +88,7 @@ public class LearningFragment extends Fragment {
 
         return root;
     }
+
 
 
 

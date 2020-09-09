@@ -1,4 +1,4 @@
-package com.example.gadsleaderboard;
+package com.example.gadsleaderboard.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,24 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gadsleaderboard.R;
 import com.example.gadsleaderboard.models.Learner;
-import com.example.gadsleaderboard.ui.main.LearningFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHolder> {
+public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
 
     private final Context mContext;
     private final LayoutInflater mLayoutInflater;
     private List<Learner> mLearners;
-   private int mCode;
 
 
-    public LearnerAdapter(Context context, List<Learner> learners, int code) {
+
+    public SkillsAdapter(Context context, List<Learner> learners) {
         mContext = context;
         mLearners = learners;
-        mCode= code;
+
         mLayoutInflater = LayoutInflater.from( mContext );
     }
 
@@ -35,7 +35,7 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = mLayoutInflater.inflate( R.layout.learner_card, parent, false );
+        View itemView = mLayoutInflater.inflate( R.layout.skills_card, parent, false );
         return new ViewHolder( itemView );
     }
 
@@ -44,26 +44,15 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
         Learner learner = mLearners.get( position );
         String msg;
         String info;
-
         String name = learner.getName();
         String country = learner.getCountry();
-
-        if(mCode == LearningFragment.LEARN_CODE){
-            int hours= learner.getHours();
-            msg = " Learning hours, ";
-            info = hours+ msg+ country;
-        }
-        else{
-            int score = learner.getScore();
-            msg = " Skill IQ score, ";
-            info = score+ msg+ country;
-        }
-
         String badgeUrl = learner.getBadgeUrl();
-
+        int score = learner.getScore();
+        msg = " Skill IQ score, ";
+        info = score+ msg+ country;
         holder.mNameText.setText( name );
         holder.mInfoText.setText( info );
-        holder.showImage( badgeUrl );
+
     }
 
     @Override
@@ -75,20 +64,14 @@ public class LearnerAdapter extends RecyclerView.Adapter<LearnerAdapter.ViewHold
 
         private final TextView mNameText;
         private final TextView mInfoText;
-        private final ImageView mBadgeImage;
 
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
             mNameText = (TextView) itemView.findViewById( R.id.learner_name_txt );
             mInfoText = (TextView) itemView.findViewById( R.id.learner_info_txt );
-            mBadgeImage = (ImageView) itemView.findViewById( R.id.badge_image );
-        }
-        public void showImage(String url){
-            if(url != null && !url.isEmpty() ){
-                Picasso.get().load( url ).resize( 280,280 ).centerCrop().into( mBadgeImage );
 
-            }
         }
+
     }
 
 

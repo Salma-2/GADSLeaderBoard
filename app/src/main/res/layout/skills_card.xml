@@ -46,8 +46,8 @@
 
             <ImageView
                 android:id="@+id/badge_image"
-                android:layout_width="77dp"
-                android:layout_height="72dp"
+                android:layout_width="111dp"
+                android:layout_height="61dp"
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginLeft="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
@@ -60,7 +60,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/learner_name_txt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/top_learner" />
+                app:srcCompat="@drawable/skill"
+                tools:srcCompat="@drawable/skill" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

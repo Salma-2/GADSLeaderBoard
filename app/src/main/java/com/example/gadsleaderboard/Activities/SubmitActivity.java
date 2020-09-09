@@ -1,4 +1,4 @@
-package com.example.gadsleaderboard;
+package com.example.gadsleaderboard.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,13 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.gadsleaderboard.R;
 import com.example.gadsleaderboard.services.LearningService;
 import com.example.gadsleaderboard.services.ServiceBuilder;
-
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;

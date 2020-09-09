@@ -2,7 +2,6 @@ package com.example.gadsleaderboard.ui.main;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.gadsleaderboard.adapters.SkillsAdapter;
 import com.example.gadsleaderboard.models.Learner;
-import com.example.gadsleaderboard.LearnerAdapter;
+import com.example.gadsleaderboard.adapters.LearnerAdapter;
 import com.example.gadsleaderboard.R;
 import com.example.gadsleaderboard.services.LearningService;
 import com.example.gadsleaderboard.services.ServiceBuilder;
@@ -30,7 +30,7 @@ import retrofit2.Response;
 public class SkillsFragment extends Fragment {
 
     private LinearLayoutManager mLinearLayoutManager;
-    private LearnerAdapter mAdapter;
+    private SkillsAdapter mAdapter;
     private RecyclerView mRecyclerView;
     public static final int SKILL_CODE = 123;
 
@@ -54,7 +54,7 @@ public class SkillsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Learner>> call, Response<List<Learner>> response) {
                 if(response.isSuccessful()){
-                    mAdapter = new LearnerAdapter( getContext(), response.body(),SKILL_CODE );
+                    mAdapter = new SkillsAdapter( getContext(), response.body() );
                     mRecyclerView.setAdapter( mAdapter );
                 }
                 else if (response.code() == 401) {

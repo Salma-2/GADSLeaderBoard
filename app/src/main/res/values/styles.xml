@@ -27,7 +27,10 @@
         <item name="android:paddingTop">@dimen/meduium_padding</item>
         <item name="android:paddingLeft">@dimen/default_padding</item>
         <item name="android:paddingRight">@dimen/large_padding</item>
-
     </style>
+
+        <style name="progressColor" parent="Widget.AppCompat.ProgressBar">
+            <item name="colorControlActivated">#FFAE45</item>
+        </style>
 
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".SubmitActivity">
+    tools:context=".Activities.SubmitActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
@@ -161,18 +161,17 @@
 
     <Button
         android:id="@+id/submit_btn"
-        android:layout_width="319dp"
-        android:layout_height="92dp"
+        android:layout_width="283dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/very_large_margin"
         android:background="@drawable/round_btn_submit"
-        android:padding="@dimen/large_padding"
+        android:elevation="10dp"
+        android:stateListAnimator="@null"
         android:text="@string/submit"
         android:textColor="@color/colorAccent"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:elevation="10dp"
         android:translationZ="10dp"
-        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/github_link_txt" />
