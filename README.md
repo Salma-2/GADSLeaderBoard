@@ -1,8 +1,8 @@
 # GADSLeaderBoard
-![](images/one.jpeg){:height="50%" width="50%"}
-![](images/two.jpeg)
-![](images/three.jpeg)
-![](images/four.jpeg)
-![](images/five.jpeg)
-![](images/six.jpeg)
-![](images/seven.jpeg)
+![](images/one.jpeg){:height="400" width="790"}
+![](images/two.jpeg){:height="400" width="790"}
+![](images/three.jpeg){:height="400" width="790"}
+![](images/four.jpeg){:height="400" width="790"}
+![](images/five.jpeg){:height="400" width="790"}
+![](images/six.jpeg){:height="400" width="790"}
+![](images/seven.jpeg){:height="400" width="790"}
