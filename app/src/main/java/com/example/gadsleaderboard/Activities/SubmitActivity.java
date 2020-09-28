@@ -157,7 +157,7 @@ public class SubmitActivity extends AppCompatActivity {
         request.enqueue( new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
+                if (response.code()==200) {
                     createSuccessDialog( v );
                 }
 
